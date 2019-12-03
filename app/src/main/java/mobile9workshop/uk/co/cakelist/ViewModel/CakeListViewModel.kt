@@ -12,7 +12,7 @@ class CakeListViewModel: ViewModel() {
     private val mService  =  RetrofitService()
 
     fun getCakeListData(context: Context) : MutableLiveData<List<CakeListDataModel>>? {
-        Log.e("getAndroidData","yes")
+        Log.e("getCakeListData","yes")
         return mService.loadCakeListData(context)
     }
 

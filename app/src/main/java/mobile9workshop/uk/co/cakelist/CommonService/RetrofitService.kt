@@ -37,7 +37,7 @@ class RetrofitService {
 
         Log.e("loadCakesData","yes")
 
-        val retrofitCall  = create().getAndroid()
+        val retrofitCall  = create().getCakeList()
 
         retrofitCall.enqueue(object : Callback<List<CakeListDataModel>> {
             override fun onFailure(call: Call<List<CakeListDataModel>>, t: Throwable?) {

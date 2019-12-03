@@ -52,7 +52,7 @@ class CakeListActivity : BaseActivity() {
 
 
     private fun getCakeList() {
-        Log.e("getAndroidVersion","yes")
+        Log.e("get Data","yes")
 
         val mAndroidViewModel = ViewModelProviders.of(this@CakeListActivity).get(CakeListViewModel::class.java)
         mAndroidViewModel.getCakeListData(this@CakeListActivity)?.observe(this, Observer<List<CakeListDataModel>> { cakeList ->
