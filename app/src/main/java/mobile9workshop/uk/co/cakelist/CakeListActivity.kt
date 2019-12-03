@@ -61,7 +61,7 @@ class CakeListActivity : BaseActivity() {
             recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
             recyclerView.adapter = CakeListAdapter(this@CakeListActivity, cakeList.sortedWith(compareBy({ it.title })).distinct() as ArrayList<CakeListDataModel>, object : ItemClickListener {
                 override fun onItemClick(pos: Int) {
-                    Util.showMessageForCakeList(cakeList, pos,this@CakeListActivity)
+                    Util.showMessageForCakeList(cakeList.sortedWith(compareBy({ it.title })).distinct(), pos,this@CakeListActivity)
                 }
             })
         })
