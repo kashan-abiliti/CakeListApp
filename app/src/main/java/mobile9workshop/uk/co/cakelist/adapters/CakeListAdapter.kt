@@ -3,6 +3,7 @@ package mobile9workshop.uk.co.cakelist.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.jakewharton.rxbinding.view.RxView
 import com.squareup.picasso.Picasso
@@ -35,6 +36,7 @@ class CakeListAdapter(var context: CakeListActivity, var cakeList: ArrayList<Cak
 
 
         Picasso.get().load(cakeList[position].image).into(holder.imageView);
+        setAnimation(holder.mView)
 
         RxView.clicks(holder.mView).subscribe {
             mItemClickListener!!.onItemClick(position)
@@ -47,6 +49,13 @@ class CakeListAdapter(var context: CakeListActivity, var cakeList: ArrayList<Cak
         val description = view.description
         val imageView = view.image
         val mView = view
+    }
+
+    private fun setAnimation(viewToAnimate: View) {
+        if (viewToAnimate.animation == null) {
+            val animation = AnimationUtils.loadAnimation(viewToAnimate.context, android.R.anim.slide_in_left)
+            viewToAnimate.animation = animation
+        }
     }
 
 }

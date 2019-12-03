@@ -1,5 +1,6 @@
 package mobile9workshop.uk.co.cakelist
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -27,6 +28,10 @@ class CakeListActivity : BaseActivity() {
         recyclerView.layoutManager = linearLayoutManager
         recyclerView.hasFixedSize()
 
+        swipeRefresh.setOnRefreshListener {
+            getCakeList()
+        }
+
         getCakeList()
 
 
@@ -39,11 +44,19 @@ class CakeListActivity : BaseActivity() {
         val mAndroidViewModel = ViewModelProviders.of(this@CakeListActivity).get(CakeListViewModel::class.java)
         mAndroidViewModel.getCakeListData()?.observe(this, Observer<List<CakeListDataModel>> { cakeList ->
             progressBar.visibility = View.GONE
+            swipeRefresh.isRefreshing = false
             Log.e("list",cakeList?.size.toString())
             recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
             recyclerView.adapter = CakeListAdapter(this@CakeListActivity, cakeList.distinct() as ArrayList<CakeListDataModel>, object : ItemClickListener {
                 override fun onItemClick(pos: Int) {
-                    Toast.makeText(applicationContext, "item $pos clicked", Toast.LENGTH_LONG).show()
+                    val builder = AlertDialog.Builder(this@CakeListActivity)
+                    builder.setTitle(cakeList[pos].title)
+                    builder.setMessage(cakeList[pos].desc)
+                    builder.setPositiveButton("OK"){ dialogInterface, i ->
+
+                    }
+                    builder.show()
+                    //Toast.makeText(applicationContext, "item $pos clicked", Toast.LENGTH_LONG).show()
                 }
             })
         })
