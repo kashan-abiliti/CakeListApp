@@ -59,7 +59,7 @@ class CakeListActivity : BaseActivity() {
             setViewVisibility()
             Log.e("list",cakeList?.size.toString())
             recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
-            recyclerView.adapter = CakeListAdapter(this@CakeListActivity, cakeList.distinct() as ArrayList<CakeListDataModel>, object : ItemClickListener {
+            recyclerView.adapter = CakeListAdapter(this@CakeListActivity, cakeList.sortedWith(compareBy({ it.title })).distinct() as ArrayList<CakeListDataModel>, object : ItemClickListener {
                 override fun onItemClick(pos: Int) {
                     Util.showMessageForCakeList(cakeList, pos,this@CakeListActivity)
                 }

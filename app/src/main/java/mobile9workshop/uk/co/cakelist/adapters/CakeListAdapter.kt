@@ -32,7 +32,7 @@ class CakeListAdapter(var context: CakeListActivity, var cakeList: ArrayList<Cak
     override fun onBindViewHolder(holder:CakeHolder, position: Int) {
         mItemClickListener = itemClick
         holder.title?.text = cakeList[position].desc
-        holder.description?.text = cakeList[position].title
+        holder.description?.text = cakeList[position].title.capitalize()
 
 
         Picasso.get().load(cakeList[position].image).into(holder.imageView);
