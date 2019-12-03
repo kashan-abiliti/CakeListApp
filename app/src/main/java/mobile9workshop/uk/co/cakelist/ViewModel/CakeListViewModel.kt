@@ -1,5 +1,6 @@
 package mobile9workshop.uk.co.cakelist.ViewModel
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,9 +11,9 @@ class CakeListViewModel: ViewModel() {
 
     private val mService  =  RetrofitService()
 
-    fun getCakeListData() : MutableLiveData<List<CakeListDataModel>>? {
+    fun getCakeListData(context: Context) : MutableLiveData<List<CakeListDataModel>>? {
         Log.e("getAndroidData","yes")
-        return mService.loadCakeListData()
+        return mService.loadCakeListData(context)
     }
 
 }

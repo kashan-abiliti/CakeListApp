@@ -1,11 +1,14 @@
 package mobile9workshop.uk.co.cakelist.CommonService
 
+import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import mobile9workshop.uk.co.cakelist.DataModel.CakeListDataModel
 import mobile9workshop.uk.co.cakelist.Interfaces.ApiInterface
+import mobile9workshop.uk.co.cakelist.Util.Util
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Retrofit
@@ -30,7 +33,7 @@ class RetrofitService {
         }
     }
 
-    fun loadCakeListData(): MutableLiveData<List<CakeListDataModel>>? {
+    fun loadCakeListData(context : Context): MutableLiveData<List<CakeListDataModel>>? {
 
         Log.e("loadCakesData","yes")
 
@@ -38,7 +41,7 @@ class RetrofitService {
 
         retrofitCall.enqueue(object : Callback<List<CakeListDataModel>> {
             override fun onFailure(call: Call<List<CakeListDataModel>>, t: Throwable?) {
-                Log.e("on Failure :", "retrofit error")
+                Util.showMessage(t?.message.toString(), context)
             }
 
             override fun onResponse(call: Call<List<CakeListDataModel>>, response: retrofit2.Response<List<CakeListDataModel>>) {
